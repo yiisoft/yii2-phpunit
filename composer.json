@@ -3,12 +3,11 @@
   "description": "Yii 2 PHPUnit compatibility layer and enhancements",
   "type": "library",
   "require-dev": {
-    "yiisoft/yii2": "~2.0.13",
     "phpunit/phpunit": "^6.5"
   },
   "autoload": {
     "psr-4": {
-      "yii\\phpunit\\": "tests/"
+      "yii\\phpunit\\": "src/"
     }
   },
   "authors": [
@@ -18,5 +17,7 @@
     }
   ],
   "minimum-stability": "stable",
-  "require": {}
+  "require": {
+    "yiisoft/yii2": "~2.0.13.1"
+  }
 }
