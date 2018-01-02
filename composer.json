@@ -6,7 +6,7 @@
     "yiisoft/yii2": "~2.0.13",
     "phpunit/phpunit": "^6.5"
   },
-  "autoload-dev": {
+  "autoload": {
     "psr-4": {
       "yii\\phpunit\\": "tests/"
     }
