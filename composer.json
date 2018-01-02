@@ -1,0 +1,22 @@
+{
+  "name": "yiisoft/yii2-phpunit",
+  "description": "Yii 2 PHPUnit compatibility layer and enhancements",
+  "type": "library",
+  "require-dev": {
+    "yiisoft/yii2": "~2.0.13",
+    "phpunit/phpunit": "^6.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "yii\\phpunit\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Alexander Letnikow",
+      "email": "reclamme@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
+}
