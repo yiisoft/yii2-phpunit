@@ -35,10 +35,10 @@ class MigrateFixture extends Fixture
 
         $this->controller = new MigrateController('migrate', new Module('test-fixture'), [
             'db' => Yii::$app->db,
+            'interactive' => false,
+            'migrationNamespaces' => $this->migrationNamespaces,
+            'migrationPath' => $this->migrationPath,
         ]);
-
-        $this->controller->migrationNamespaces = $this->migrationNamespaces;
-        $this->controller->migrationPath = $this->migrationPath;
     }
 
     public function load()
