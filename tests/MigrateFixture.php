@@ -2,6 +2,7 @@
 
 namespace yii\phpunit;
 
+use Yii;
 use yii\base\Module;
 
 use yii\console\controllers\BaseMigrateController;
@@ -32,7 +33,9 @@ class MigrateFixture extends Fixture
     {
         parent::__construct($config);
 
-        $this->controller = new MigrateController('migrate', new Module('test-fixture'));
+        $this->controller = new MigrateController('migrate', new Module('test-fixture'), [
+            'db' => Yii::$app->db,
+        ]);
 
         $this->controller->migrationNamespaces = $this->migrationNamespaces;
         $this->controller->migrationPath = $this->migrationPath;
