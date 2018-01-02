@@ -385,7 +385,7 @@ class TestCase extends PHPUnitTestCase
             return $this->container->get(TestLogger::class);
         }
 
-        $this->container->set(Logger::class, TestLogger::class);
+        $this->container->setSingleton(Logger::class, TestLogger::class);
         return $this->getLogger();
     }
 
