@@ -262,6 +262,9 @@ class TestCase extends PHPUnitTestCase
     {
         parent::setUp();
 
+        Yii::$container = $this->container =
+            ($this->container ?: Yii::createObject(Container::class));
+
         $configFile = Yii::getAlias('@configFile');
         if (!is_file($configFile)) {
             throw new InvalidConfigException(
