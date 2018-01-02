@@ -51,9 +51,12 @@ class MigrateFixture extends Fixture
             }
             /** @var MigrationInterface $migrationInstance */
             $migrationInstance = $this->invokeControllerMethod('createMigration', $migration);
+            ob_start();
             if ($migrationInstance->up() !== false) {
+                ob_end_clean();
                 $this->invokeControllerMethod('addMigrationHistory', $migration);
             } else {
+                ob_end_flush();
                 throw new \RuntimeException("Failed to apply $migration");
             }
         }
