@@ -285,7 +285,7 @@ class TestCase extends PHPUnitTestCase
 
         $this->app = Yii::createObject($config);
 
-        $this->initFixtures();
+        $this->loadFixtures();
 
         if ($this->isTransactional && $this->app->has('db')) {
             $this->transaction = $this->app->db->beginTransaction();
