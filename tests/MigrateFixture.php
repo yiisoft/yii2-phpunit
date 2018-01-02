@@ -8,6 +8,7 @@ use yii\base\Module;
 use yii\console\controllers\BaseMigrateController;
 use yii\console\controllers\MigrateController;
 
+use yii\db\MigrationInterface;
 use yii\test\Fixture;
 
 /**
@@ -43,11 +44,50 @@ class MigrateFixture extends Fixture
 
     public function load()
     {
-        $this->controller->actionUp();
+        $migrations = $this->invokeControllerMethod('getNewMigrations');
+        foreach ($migrations as $migration) {
+            if ($migration === BaseMigrateController::BASE_MIGRATION) {
+                continue;
+            }
+            /** @var MigrationInterface $migrationInstance */
+            $migrationInstance = $this->invokeControllerMethod('createMigration', $migration);
+            if ($migrationInstance->up() !== false) {
+                $this->invokeControllerMethod('addMigrationHistory', $migration);
+            } else {
+                throw new \RuntimeException("Failed to apply $migration");
+            }
+        }
     }
 
     public function unload()
     {
-        $this->controller->actionDown();
+        $migrations = $this->invokeControllerMethod('getMigrationHistory', null);
+        foreach (array_keys($migrations) as $migration) {
+            if ($migration === BaseMigrateController::BASE_MIGRATION) {
+                continue;
+            }
+            /** @var MigrationInterface $migrationInstance */
+            $migrationInstance = $this->invokeControllerMethod('createMigration', $migration);
+            ob_start();
+            if ($migrationInstance->down() !== false) {
+                ob_end_clean();
+                $this->invokeControllerMethod('removeMigrationHistory', $migration);
+            } else {
+                ob_end_flush();
+                throw new \RuntimeException("Failed to revert $migration");
+            }
+        }
+    }
+
+    /**
+     * @param string $method
+     * @param array ...$args
+     * @return mixed
+     */
+    protected function invokeControllerMethod($method, ...$args)
+    {
+        $methodInstance = new \ReflectionMethod(MigrateController::class, $method);
+        $methodInstance->setAccessible(true);
+        return $methodInstance->invoke($this->controller, ...$args);
     }
 }

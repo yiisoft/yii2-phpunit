@@ -262,8 +262,10 @@ class TestCase extends PHPUnitTestCase
     {
         parent::setUp();
 
-        Yii::$container = $this->container =
-            ($this->container ?: Yii::createObject(Container::class));
+        if (empty(Yii::$container)) {
+            Yii::$container = Yii::createObject(Container::class);
+        }
+        $this->container = Yii::$container;
 
         $configFile = Yii::getAlias('@configFile');
         if (!is_file($configFile)) {
@@ -273,14 +275,15 @@ class TestCase extends PHPUnitTestCase
         }
 
         $config = require($configFile);
+
         $this->persistDb($config);
+        $this->mockMailer($config);
 
         if (!array_key_exists('class', $config)) {
             $config['class'] = \yii\console\Application::class;
         };
 
         $this->app = Yii::createObject($config);
-        Yii::setLogger($this->getLogger());
 
         $this->initFixtures();
 
@@ -288,11 +291,14 @@ class TestCase extends PHPUnitTestCase
             $this->transaction = $this->app->db->beginTransaction();
         }
 
+        Yii::setLogger($this->getLogger());
     }
 
     protected function tearDown()
     {
         parent::tearDown();
+
+        \Yii::setLogger(null);
 
         $mailer = $this->app->mailer;
         if ($mailer instanceof TestMailer) {
@@ -327,7 +333,8 @@ class TestCase extends PHPUnitTestCase
         if ($this->container->hasSingleton(Connection::class)) {
             $config['components']['db'] = $this->container->get(Connection::class);
         } elseif (isset($config['components']['db'])) {
-            $this->container->setSingleton(Connection::class, $config['components']['db']);
+            $db = Yii::createObject($config['components']['db']);
+            $this->container->setSingleton(Connection::class, $db);
             $this->persistDb($config);
         }
     }

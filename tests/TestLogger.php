@@ -43,6 +43,14 @@ class TestLogger extends Logger
             $message = $message->__toString();
         }
 
-        Console::error("[$category] " . VarDumper::export($message));
+        $color = Console::FG_GREY;
+        if ($level === Logger::LEVEL_ERROR) {
+            $color = Console::FG_RED;
+        } elseif ($level === Logger::LEVEL_WARNING) {
+            $color = Console::FG_YELLOW;
+        }
+
+        $text = Console::ansiFormat("[$category] " . VarDumper::export($message), [$color]);
+        Console::output($text);
     }
 }
