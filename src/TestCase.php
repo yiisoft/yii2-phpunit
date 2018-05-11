@@ -26,7 +26,6 @@ use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 
 use yii\test\FixtureTrait;
-use yii\test\InitDbFixture;
 
 /**
  * Class TestCase
@@ -56,13 +55,6 @@ class TestCase extends PHPUnitTestCase
 
     /** @var Transaction */
     private $transaction;
-
-    public function globalFixtures()
-    {
-        return [
-            InitDbFixture::class,
-        ];
-    }
 
     /**
      * Authorizes user on a site without submitting login form.
