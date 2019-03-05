@@ -250,7 +250,7 @@ class TestCase extends PHPUnitTestCase
     /**
      * @throws InvalidConfigException
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -286,7 +286,7 @@ class TestCase extends PHPUnitTestCase
         Yii::setLogger($this->getLogger());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

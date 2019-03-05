@@ -3,7 +3,6 @@
   "description": "Yii 2 PHPUnit compatibility layer and enhancements",
   "type": "library",
   "require-dev": {
-    "phpunit/phpunit": "^6.5"
   },
   "autoload": {
     "psr-4": {
@@ -18,6 +17,7 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "yiisoft/yii2": "^2.0.13.1"
+    "yiisoft/yii2": "^2.0.13.1",
+    "phpunit/phpunit": "^6.5 || ^7 || ^8"
   }
 }
