@@ -1,6 +1,6 @@
 <?php
 
-namespace yii\phpunit;
+namespace Horat1us\Yii\PHPUnit;
 
 use Yii;
 use yii\base\Module;
@@ -13,7 +13,7 @@ use yii\test\Fixture;
 
 /**
  * Class MigrateFixture
- * @package yii\phpunit
+ * @package Horat1us\Yii\PHPUnit
  */
 class MigrateFixture extends Fixture
 {

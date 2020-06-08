@@ -11,7 +11,7 @@ Use case: your package contains migrations and you need to apply it before tests
 ## Usage
 - Install package and *phpunit/phpunit* as dev dependencies
 ```bash
-composer require --dev yiisoft/yii2-phpunit phpunit/phpunit
+composer require --dev horat1us/yii2-phpunit
 ```
 - Configure your PHPUnit and create bootstrap file with alias to config:
 ```php
@@ -20,7 +20,7 @@ composer require --dev yiisoft/yii2-phpunit phpunit/phpunit
 
 Yii::setAlias('@configFile', 'path-to-config.php');
 ```
-- Create your test cases that extend [yii\phpunit\TestCase](./src/TestCase.php)
+- Create your test cases that extend [Horat1us\Yii\PHPUnit\TestCase](./src/TestCase.php)
 
 ## Example
 See [horat1us/yii2-advanced-package](https://github.com/Horat1us/yii2-advanced-package) for details.

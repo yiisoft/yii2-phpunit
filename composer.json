@@ -1,12 +1,20 @@
 {
-  "name": "yiisoft/yii2-phpunit",
+  "name": "horat1us/yii2-phpunit",
   "description": "Yii 2 PHPUnit compatibility layer and enhancements",
   "type": "library",
   "require-dev": {
   },
   "autoload": {
     "psr-4": {
-      "yii\\phpunit\\": "src/"
+      "Horat1us\\Yii\\PHPUnit\\": "src/"
+    },
+    "files": [
+      "src/autoload.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Horat1us\\Yii\\PHPUnit\\Tests\\": "tests/"
     }
   },
   "authors": [
@@ -17,7 +25,8 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "yiisoft/yii2": "^2.0.13.1",
-    "phpunit/phpunit": "^6.5 || ^7 || ^8"
+    "php": ">=7.4",
+    "yiisoft/yii2": "^2.0.19",
+    "phpunit/phpunit": "^9"
   }
 }

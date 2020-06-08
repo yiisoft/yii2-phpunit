@@ -1,6 +1,6 @@
 <?php
 
-namespace yii\phpunit;
+namespace Horat1us\Yii\PHPUnit;
 
 use yii\db\Command;
 use yii\helpers\Console;
@@ -9,7 +9,7 @@ use yii\log\Logger;
 
 /**
  * Class TestLogger
- * @package yii\phpunit
+ * @package Horat1us\Yii\PHPUnit
  */
 class TestLogger extends Logger
 {

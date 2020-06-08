@@ -1,8 +1,6 @@
 <?php
 
-namespace yii\phpunit;
-
-use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+namespace Horat1us\Yii\PHPUnit;
 
 use Yii;
 
@@ -29,9 +27,9 @@ use yii\test\FixtureTrait;
 
 /**
  * Class TestCase
- * @package yii\phpunit
+ * @package Horat1us\Yii\PHPUnit
  */
-class TestCase extends PHPUnitTestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     use FixtureTrait;
 
@@ -259,14 +257,16 @@ class TestCase extends PHPUnitTestCase
         }
         $this->container = Yii::$container;
 
-        $configFile = Yii::getAlias('@configFile');
-        if (!is_file($configFile)) {
-            throw new InvalidConfigException(
-                "The application config file does not exist: " . $configFile
-            );
+        $config = ['id' => 'test-case', 'basePath' => getcwd(),];
+        if ($configFile = Yii::getAlias('@configFile', false)) {
+            if (!is_file($configFile)) {
+                throw new InvalidConfigException(
+                    "The application config file does not exist: " . $configFile
+                );
+            }
+            $config = array_merge($config, require($configFile));
         }
 
-        $config = require($configFile);
 
         $this->persistDb($config);
         $this->mockMailer($config);

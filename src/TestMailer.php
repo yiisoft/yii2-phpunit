@@ -1,13 +1,13 @@
 <?php
 
-namespace yii\phpunit;
+namespace Horat1us\Yii\PHPUnit;
 
 use yii\mail\BaseMailer;
 use yii\mail\MessageInterface;
 
 /**
  * Class TestMailer
- * @package yii\phpunit
+ * @package Horat1us\Yii\PHPUnit
  */
 class TestMailer extends BaseMailer
 {
