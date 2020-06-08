@@ -1,5 +1,12 @@
 <?php
 
+try {
+    $dotEnv = \Dotenv\Dotenv::createImmutable(getcwd(), ['.env', '.env.example']);
+    $dotEnv->load();
+} catch (\Dotenv\Exception\InvalidPathException $exception) {
+    echo $exception->getMessage() . PHP_EOL;
+}
+
 if (!class_exists(\Yii::class)) {
     $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
     $vendorDir = dirname(dirname($reflection->getFileName()));

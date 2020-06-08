@@ -27,6 +27,7 @@
   "require": {
     "php": ">=7.4",
     "yiisoft/yii2": "^2.0.19",
-    "phpunit/phpunit": "^9"
+    "phpunit/phpunit": "^9",
+    "vlucas/phpdotenv": "^5.0"
   }
 }
