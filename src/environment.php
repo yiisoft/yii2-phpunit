@@ -1,4 +1,10 @@
 <?php declare(strict_types=1);
 
-$dotEnv = \Dotenv\Dotenv::createImmutable(getcwd(), ['.env', '.env.example']);
+$repository = \Dotenv\Repository\RepositoryBuilder::createWithNoAdapters()
+    ->addAdapter(\Dotenv\Repository\Adapter\EnvConstAdapter::class)
+    ->addWriter(\Dotenv\Repository\Adapter\PutenvAdapter::class)
+    ->immutable()
+    ->make();
+
+$dotEnv = \Dotenv\Dotenv::create($repository, getcwd(), ['.env', '.env.example']);
 $dotEnv->safeLoad();
