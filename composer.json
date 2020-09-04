@@ -3,12 +3,15 @@
   "description": "Yii 2 PHPUnit compatibility layer and enhancements",
   "type": "library",
   "require-dev": {
+    "squizlabs/php_codesniffer": "^3.5"
   },
   "autoload": {
     "psr-4": {
       "Horat1us\\Yii\\PHPUnit\\": "src/"
     },
     "files": [
+      "src/environment.php",
+      "src/constants.php",
       "src/autoload.php"
     ]
   },
@@ -17,6 +20,7 @@
       "Horat1us\\Yii\\PHPUnit\\Tests\\": "tests/"
     }
   },
+  "license": "MIT",
   "authors": [
     {
       "name": "Alexander Letnikow",
@@ -26,8 +30,18 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4",
-    "yiisoft/yii2": "^2.0.19",
+    "yiisoft/yii2": "^2.0.35",
     "phpunit/phpunit": "^9",
     "vlucas/phpdotenv": "^5.0"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "sort-packages": true
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs --standard=PSR2 ./src ./tests",
+    "phpcbf": "./vendor/bin/phpcbf --standard=PSR2 ./src ./tests",
+    "test": "./vendor/bin/phpunit",
+    "cover": "./vendor/bin/phpunit --coverage-clover=coverage.xml"
   }
 }
