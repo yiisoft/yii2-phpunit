@@ -6,5 +6,5 @@ $repository = \Dotenv\Repository\RepositoryBuilder::createWithNoAdapters()
     ->immutable()
     ->make();
 
-$dotEnv = \Dotenv\Dotenv::create($repository, getcwd(), ['.env', '.env.example']);
+$dotEnv = \Dotenv\Dotenv::create($repository, getcwd(), ['.env', '.env.test']);
 $dotEnv->safeLoad();
